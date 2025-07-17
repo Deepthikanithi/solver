@@ -1,0 +1,927 @@
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import {
+  BarChart3,
+  TrendingUp,
+  DollarSign,
+  Clock,
+  Award,
+  Users,
+  Calendar,
+  MessageCircle,
+  FileText,
+  Star,
+  Plus,
+  Eye,
+  Bell,
+  Settings,
+  Sun,
+  Moon,
+  User,
+  ChevronDown,
+  Home,
+  BookOpen,
+  CreditCard,
+  UserCheck,
+  Shield,
+  BarChart,
+  HelpCircle
+} from 'lucide-react'
+import GlassButton from '../components/GlassButton'
+
+const DashboardTest = ({ darkMode, setDarkMode }) => {
+  const navigate = useNavigate()
+  const [activeSection, setActiveSection] = useState('Dashboard')
+  const [showNotifications, setShowNotifications] = useState(false)
+
+  const handleCreateTutorial = () => {
+    navigate('/content')
+  }
+
+  const handleViewEarnings = () => {
+    navigate('/earnings')
+  }
+
+  const handleStartSession = (sessionId) => {
+    navigate(`/sessions?id=${sessionId}`)
+  }
+
+  const handleAddSlot = () => {
+    navigate('/sessions?tab=availability')
+  }
+
+  const handleNotificationClick = () => {
+    setShowNotifications(!showNotifications)
+  }
+
+  const sidebarItems = [
+    { icon: Home, label: 'Dashboard', path: '/dashboard' },
+    { icon: Calendar, label: 'Sessions', path: '/sessions' },
+    { icon: BookOpen, label: 'Content Creator', path: '/content' },
+    { icon: DollarSign, label: 'Earnings', path: '/earnings' },
+    { icon: User, label: 'Profile', path: '/profile' },
+    { icon: Shield, label: 'Verification', path: '/verification' },
+  ]
+
+  const toolsItems = [
+    { icon: BarChart, label: 'Analytics', path: '/analytics' },
+    { icon: Users, label: 'Community', path: '/community' },
+    { icon: HelpCircle, label: 'Support', path: '/support' },
+  ]
+
+  const handleViewDoubtPool = () => {
+    setActiveTab('doubtpool')
+  }
+
+  const handleViewLeaderboard = () => {
+    setActiveTab('leaderboard')
+  }
+
+  return (
+    <div className="min-h-screen transition-all duration-500 relative overflow-hidden" style={{
+      background: darkMode
+        ? 'linear-gradient(135deg, #00001a 0%, #000033 50%, #00001a 100%)'
+        : 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%)'
+    }}>
+      {/* Background Radiance Effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-40 right-32 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-32 left-1/3 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Top Navigation Bar */}
+      <div className="sticky top-0 z-50 backdrop-blur-xl border-b transition-all duration-300" style={{
+        background: darkMode
+          ? 'rgba(0, 0, 26, 0.7)'
+          : 'rgba(255, 255, 255, 0.7)',
+        borderColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+        boxShadow: darkMode
+          ? '0 8px 32px rgba(0, 0, 0, 0.3)'
+          : '0 8px 32px rgba(0, 0, 0, 0.1)'
+      }}>
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Left side - Title */}
+            <div>
+              <h1 className="text-2xl font-bold">SynapMentor Dashboard</h1>
+              <p className="text-sm opacity-70">Welcome back! Here's your mentoring overview.</p>
+            </div>
+
+            {/* Right side - Controls */}
+            <div className="flex items-center gap-4">
+              {/* Notifications */}
+              <div className="relative">
+                <button
+                  onClick={handleNotificationClick}
+                  className="p-3 rounded-xl transition-all duration-300 hover:scale-105 relative group"
+                  style={{
+                    background: darkMode
+                      ? 'rgba(255, 255, 255, 0.05)'
+                      : 'rgba(255, 255, 255, 0.8)',
+                    backdropFilter: 'blur(20px)',
+                    border: darkMode
+                      ? '1px solid rgba(255, 255, 255, 0.1)'
+                      : '1px solid rgba(0, 0, 0, 0.1)',
+                    boxShadow: darkMode
+                      ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                      : '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
+                  }}
+                >
+                  {/* Radiance Effect */}
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                  <Bell className="w-5 h-5 relative z-10" style={{ color: darkMode ? '#ffffff' : '#00001a' }} />
+                  {/* Notification Badge */}
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-xs flex items-center justify-center text-white font-bold shadow-lg">
+                    3
+                  </span>
+                </button>
+
+                {/* Notification Dropdown */}
+                {showNotifications && (
+                  <div className="absolute right-0 top-16 w-80 rounded-2xl shadow-2xl backdrop-blur-xl border z-50" style={{
+                    background: darkMode
+                      ? 'rgba(0, 0, 26, 0.8)'
+                      : 'rgba(255, 255, 255, 0.9)',
+                    borderColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+                    boxShadow: darkMode
+                      ? '0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                      : '0 20px 60px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
+                  }}>
+                    <div className="p-4">
+                      <h3 className="font-semibold mb-3">Notifications</h3>
+                      <div className="space-y-3">
+                        <div className={`p-3 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-gray-50'}`}>
+                          <p className="text-sm font-medium">New session request</p>
+                          <p className="text-xs opacity-70">React debugging help needed</p>
+                          <p className="text-xs opacity-50">2 minutes ago</p>
+                        </div>
+                        <div className={`p-3 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-gray-50'}`}>
+                          <p className="text-sm font-medium">Payment received</p>
+                          <p className="text-xs opacity-70">$45.00 for AWS session</p>
+                          <p className="text-xs opacity-50">1 hour ago</p>
+                        </div>
+                        <div className={`p-3 rounded-lg ${darkMode ? 'bg-white/10' : 'bg-gray-50'}`}>
+                          <p className="text-sm font-medium">Anonymous doubt posted</p>
+                          <p className="text-xs opacity-70">Docker container issue</p>
+                          <p className="text-xs opacity-50">3 hours ago</p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={handleViewDoubtPool}
+                        className="w-full mt-3 text-sm text-blue-500 hover:text-blue-600"
+                      >
+                        View all notifications
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Settings */}
+              <button
+                onClick={() => navigate('/settings')}
+                className="p-3 rounded-xl transition-all duration-300 hover:scale-105 group"
+                style={{
+                  background: darkMode
+                    ? 'rgba(255, 255, 255, 0.05)'
+                    : 'rgba(255, 255, 255, 0.8)',
+                  backdropFilter: 'blur(20px)',
+                  border: darkMode
+                    ? '1px solid rgba(255, 255, 255, 0.1)'
+                    : '1px solid rgba(0, 0, 0, 0.1)',
+                  boxShadow: darkMode
+                    ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                    : '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
+                }}
+              >
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-green-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                <Settings className="w-5 h-5 relative z-10" style={{ color: darkMode ? '#ffffff' : '#00001a' }} />
+              </button>
+
+              {/* Dark/Light Mode Toggle */}
+              <button
+                onClick={() => setDarkMode && setDarkMode(!darkMode)}
+                className="p-3 rounded-xl transition-all duration-300 hover:scale-105 group"
+                style={{
+                  background: darkMode
+                    ? 'rgba(255, 255, 255, 0.05)'
+                    : 'rgba(255, 255, 255, 0.8)',
+                  backdropFilter: 'blur(20px)',
+                  border: darkMode
+                    ? '1px solid rgba(255, 255, 255, 0.1)'
+                    : '1px solid rgba(0, 0, 0, 0.1)',
+                  boxShadow: darkMode
+                    ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                    : '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
+                }}
+              >
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-yellow-500/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                {darkMode ?
+                  <Sun className="w-5 h-5 relative z-10" style={{ color: '#ffffff' }} /> :
+                  <Moon className="w-5 h-5 relative z-10" style={{ color: '#00001a' }} />
+                }
+              </button>
+
+              {/* Profile Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => navigate('/profile')}
+                  className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:scale-105 group"
+                  style={{
+                    background: darkMode
+                      ? 'rgba(255, 255, 255, 0.05)'
+                      : 'rgba(255, 255, 255, 0.8)',
+                    backdropFilter: 'blur(20px)',
+                    border: darkMode
+                      ? '1px solid rgba(255, 255, 255, 0.1)'
+                      : '1px solid rgba(0, 0, 0, 0.1)',
+                    boxShadow: darkMode
+                      ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                      : '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
+                  }}
+                >
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center relative z-10" style={{
+                    background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(147, 51, 234, 0.3))',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)'
+                  }}>
+                    <User className="w-4 h-4 text-blue-400" />
+                  </div>
+                  <div className="text-left hidden sm:block relative z-10">
+                    <p className="text-sm font-medium" style={{ color: darkMode ? '#ffffff' : '#00001a' }}>John Mentor</p>
+                    <p className="text-xs opacity-70">Expert</p>
+                  </div>
+                  <ChevronDown className="w-4 h-4 opacity-50 relative z-10" style={{ color: darkMode ? '#ffffff' : '#00001a' }} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto p-6">
+
+        {/* Analytics Section */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold">Analytics Overview</h2>
+            <button
+              onClick={handleViewLeaderboard}
+              className={`px-4 py-2 rounded-lg transition-all duration-200 ${
+                darkMode
+                  ? 'bg-white/10 hover:bg-white/20 border border-white/20'
+                  : 'bg-gray-100 hover:bg-gray-200 border border-gray-200'
+              }`}
+            >
+              View Leaderboard
+            </button>
+          </div>
+
+          {/* Analytics Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            {/* Content Growth */}
+            <div className="p-6 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden" style={{
+              background: darkMode
+                ? 'rgba(255, 255, 255, 0.05)'
+                : 'rgba(255, 255, 255, 0.9)',
+              borderColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+              boxShadow: darkMode
+                ? '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+            }}>
+              {/* Background Radiance */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+              <div className="flex items-center justify-between mb-4 relative z-10">
+                <div className="p-3 rounded-xl backdrop-blur-lg" style={{
+                  background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1))',
+                  border: '1px solid rgba(59, 130, 246, 0.3)',
+                  boxShadow: '0 8px 32px rgba(59, 130, 246, 0.2)'
+                }}>
+                  <BarChart3 className="w-6 h-6 text-blue-400" />
+                </div>
+                <span className="text-green-400 text-sm font-bold bg-green-500/20 px-2 py-1 rounded-lg backdrop-blur-sm">+12%</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1 relative z-10" style={{ color: darkMode ? '#ffffff' : '#00001a' }}>156</h3>
+              <p className="text-sm opacity-70 relative z-10">Content Growth</p>
+            </div>
+
+            {/* Solved Problems */}
+            <div className="p-6 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden" style={{
+              background: darkMode
+                ? 'rgba(255, 255, 255, 0.05)'
+                : 'rgba(255, 255, 255, 0.9)',
+              borderColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+              boxShadow: darkMode
+                ? '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+            }}>
+              {/* Background Radiance */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-500/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+              <div className="flex items-center justify-between mb-4 relative z-10">
+                <div className="p-3 rounded-xl backdrop-blur-lg" style={{
+                  background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1))',
+                  border: '1px solid rgba(34, 197, 94, 0.3)',
+                  boxShadow: '0 8px 32px rgba(34, 197, 94, 0.2)'
+                }}>
+                  <TrendingUp className="w-6 h-6 text-green-400" />
+                </div>
+                <span className="text-green-400 text-sm font-bold bg-green-500/20 px-2 py-1 rounded-lg backdrop-blur-sm">+8%</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1 relative z-10" style={{ color: darkMode ? '#ffffff' : '#00001a' }}>89</h3>
+              <p className="text-sm opacity-70 relative z-10">Solved Problems</p>
+            </div>
+
+            {/* Earnings */}
+            <div className="p-6 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden" style={{
+              background: darkMode
+                ? 'rgba(255, 255, 255, 0.05)'
+                : 'rgba(255, 255, 255, 0.9)',
+              borderColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+              boxShadow: darkMode
+                ? '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+            }}>
+              {/* Background Radiance */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-yellow-500/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+              <div className="flex items-center justify-between mb-4 relative z-10">
+                <div className="p-3 rounded-xl backdrop-blur-lg" style={{
+                  background: 'linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(234, 179, 8, 0.1))',
+                  border: '1px solid rgba(234, 179, 8, 0.3)',
+                  boxShadow: '0 8px 32px rgba(234, 179, 8, 0.2)'
+                }}>
+                  <DollarSign className="w-6 h-6 text-yellow-400" />
+                </div>
+                <span className="text-green-400 text-sm font-bold bg-green-500/20 px-2 py-1 rounded-lg backdrop-blur-sm">+15%</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1 relative z-10" style={{ color: darkMode ? '#ffffff' : '#00001a' }}>$2,340</h3>
+              <p className="text-sm opacity-70 relative z-10">Total Earnings</p>
+            </div>
+
+            {/* Streak */}
+            <div className="p-6 rounded-2xl shadow-2xl backdrop-blur-xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden" style={{
+              background: darkMode
+                ? 'rgba(255, 255, 255, 0.05)'
+                : 'rgba(255, 255, 255, 0.9)',
+              borderColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+              boxShadow: darkMode
+                ? '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+            }}>
+              {/* Background Radiance */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-500/20 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+              <div className="flex items-center justify-between mb-4 relative z-10">
+                <div className="p-3 rounded-xl backdrop-blur-lg" style={{
+                  background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.1))',
+                  border: '1px solid rgba(249, 115, 22, 0.3)',
+                  boxShadow: '0 8px 32px rgba(249, 115, 22, 0.2)'
+                }}>
+                  <Award className="w-6 h-6 text-orange-400" />
+                </div>
+                <span className="text-green-400 text-sm font-bold bg-green-500/20 px-2 py-1 rounded-lg backdrop-blur-sm">+2</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1 relative z-10" style={{ color: darkMode ? '#ffffff' : '#00001a' }}>45</h3>
+              <p className="text-sm opacity-70 relative z-10">Day Streak</p>
+            </div>
+          </div>
+
+          {/* Additional Analytics Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Badge */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border transition-all duration-300 hover:scale-105 ${
+              darkMode
+                ? 'bg-white/10 border-white/20 hover:bg-white/15'
+                : 'bg-white/80 border-gray-200 hover:bg-white/90'
+            }`}>
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-3 rounded-lg ${darkMode ? 'bg-purple-500/20' : 'bg-purple-100'}`}>
+                  <Star className="w-6 h-6 text-purple-500" />
+                </div>
+                <span className="text-green-500 text-sm font-medium">+1</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1">12</h3>
+              <p className="text-sm opacity-70">Badges Earned</p>
+            </div>
+
+            {/* Reached Content */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border transition-all duration-300 hover:scale-105 ${
+              darkMode
+                ? 'bg-white/10 border-white/20 hover:bg-white/15'
+                : 'bg-white/80 border-gray-200 hover:bg-white/90'
+            }`}>
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-3 rounded-lg ${darkMode ? 'bg-indigo-500/20' : 'bg-indigo-100'}`}>
+                  <Eye className="w-6 h-6 text-indigo-500" />
+                </div>
+                <span className="text-green-500 text-sm font-medium">+25%</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1">1,234</h3>
+              <p className="text-sm opacity-70">Reached Content</p>
+            </div>
+
+            {/* Total Sessions */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border transition-all duration-300 hover:scale-105 ${
+              darkMode
+                ? 'bg-white/10 border-white/20 hover:bg-white/15'
+                : 'bg-white/80 border-gray-200 hover:bg-white/90'
+            }`}>
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-3 rounded-lg ${darkMode ? 'bg-teal-500/20' : 'bg-teal-100'}`}>
+                  <Users className="w-6 h-6 text-teal-500" />
+                </div>
+                <span className="text-green-500 text-sm font-medium">+18%</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1">67</h3>
+              <p className="text-sm opacity-70">Total Sessions</p>
+            </div>
+
+            {/* Hours Taught */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border transition-all duration-300 hover:scale-105 ${
+              darkMode
+                ? 'bg-white/10 border-white/20 hover:bg-white/15'
+                : 'bg-white/80 border-gray-200 hover:bg-white/90'
+            }`}>
+              <div className="flex items-center justify-between mb-4">
+                <div className={`p-3 rounded-lg ${darkMode ? 'bg-pink-500/20' : 'bg-pink-100'}`}>
+                  <Clock className="w-6 h-6 text-pink-500" />
+                </div>
+                <span className="text-green-500 text-sm font-medium">+22%</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-1">234</h3>
+              <p className="text-sm opacity-70">Hours Taught</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Available Slots Calendar */}
+            <div className="p-6 rounded-2xl shadow-2xl backdrop-blur-xl border group relative overflow-hidden" style={{
+              background: darkMode
+                ? 'rgba(255, 255, 255, 0.05)'
+                : 'rgba(255, 255, 255, 0.9)',
+              borderColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+              boxShadow: darkMode
+                ? '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                : '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+            }}>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-xl font-bold mb-1">Available Slots</h3>
+                  <p className="text-sm opacity-70">Manage your availability calendar</p>
+                </div>
+                <GlassButton
+                  onClick={handleAddSlot}
+                  className="flex items-center gap-2"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Slot
+                </GlassButton>
+              </div>
+
+              {/* Mini Calendar */}
+              <div className="grid grid-cols-7 gap-2 mb-4">
+                {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
+                  <div key={day} className="text-center text-sm font-medium opacity-70 p-2">
+                    {day}
+                  </div>
+                ))}
+                {Array.from({length: 35}, (_, i) => (
+                  <div key={i} className={`text-center text-sm p-2 rounded cursor-pointer transition-colors ${
+                    i === 15 || i === 18 || i === 22
+                      ? (darkMode ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-100 text-blue-700')
+                      : (darkMode ? 'hover:bg-white/10' : 'hover:bg-gray-100')
+                  }`}>
+                    {i > 6 ? i - 6 : ''}
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-blue-500 rounded"></div>
+                  <span>Available</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-green-500 rounded"></div>
+                  <span>Booked</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Review Sessions */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border ${
+              darkMode
+                ? 'bg-white/10 border-white/20'
+                : 'bg-white/80 border-gray-200'
+            }`}>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-xl font-bold mb-1">Review Sessions</h3>
+                  <p className="text-sm opacity-70">Sessions pending your approval</p>
+                </div>
+                <span className="bg-orange-500 text-white px-2 py-1 rounded-full text-xs">2 Pending</span>
+              </div>
+
+              <div className="space-y-4">
+                <div className={`p-4 rounded-lg border ${
+                  darkMode ? 'bg-white/5 border-white/10' : 'bg-gray-50 border-gray-200'
+                }`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h4 className="font-semibold">React State Management Help</h4>
+                      <p className="text-sm opacity-70">Student: Alex Johnson • Duration: 60 min</p>
+                      <p className="text-sm opacity-70">Proposed: Tomorrow 2:00 PM</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">
+                        Accept
+                      </button>
+                      <button className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
+                        Decline
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-sm">Need help with Redux and Context API implementation...</p>
+                </div>
+
+                <div className={`p-4 rounded-lg border ${
+                  darkMode ? 'bg-white/5 border-white/10' : 'bg-gray-50 border-gray-200'
+                }`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <h4 className="font-semibold">AWS Lambda Debugging</h4>
+                      <p className="text-sm opacity-70">Student: Sarah Chen • Duration: 45 min</p>
+                      <p className="text-sm opacity-70">Proposed: Friday 4:00 PM</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">
+                        Accept
+                      </button>
+                      <button className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600">
+                        Decline
+                      </button>
+                    </div>
+                  </div>
+                  <p className="text-sm">Lambda function throwing timeout errors...</p>
+                </div>
+              </div>
+            </div>
+            {/* Schedule */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border ${
+              darkMode
+                ? 'bg-white/10 border-white/20'
+                : 'bg-white/80 border-gray-200'
+            }`}>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-xl font-bold mb-1">Today's Schedule</h3>
+                  <p className="text-sm opacity-70">Your sessions for today</p>
+                </div>
+                <button
+                  onClick={() => navigate('/sessions')}
+                  className={`px-4 py-2 rounded-lg text-sm transition-all duration-200 ${
+                    darkMode
+                      ? 'bg-white/10 hover:bg-white/20 border border-white/20'
+                      : 'bg-gray-100 hover:bg-gray-200 border border-gray-200'
+                  }`}
+                >
+                  View All
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div className={`p-4 rounded-lg border-l-4 border-blue-500 ${
+                  darkMode ? 'bg-white/5' : 'bg-blue-50'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-semibold">React Debugging Session</h4>
+                      <p className="text-sm opacity-70">with Alex Johnson</p>
+                      <p className="text-sm text-blue-500">2:00 PM - 3:00 PM</p>
+                    </div>
+                    <button
+                      onClick={() => handleStartSession('session-1')}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600"
+                    >
+                      Join
+                    </button>
+                  </div>
+                </div>
+
+                <div className={`p-4 rounded-lg border-l-4 border-green-500 ${
+                  darkMode ? 'bg-white/5' : 'bg-green-50'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-semibold">AWS Lambda Help</h4>
+                      <p className="text-sm opacity-70">with Sarah Chen</p>
+                      <p className="text-sm text-green-500">4:00 PM - 4:45 PM</p>
+                    </div>
+                    <span className="text-sm opacity-70">Upcoming</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Anonymous Doubt Pools */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border ${
+              darkMode
+                ? 'bg-white/10 border-white/20'
+                : 'bg-white/80 border-gray-200'
+            }`}>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-xl font-bold mb-1">Anonymous Doubt Pools</h3>
+                  <p className="text-sm opacity-70">Help students with anonymous questions</p>
+                </div>
+                <div className="flex gap-2">
+                  <span className="bg-red-500 text-white px-2 py-1 rounded-full text-xs">5 Active</span>
+                  <button
+                    onClick={handleViewDoubtPool}
+                    className={`px-4 py-2 rounded-lg text-sm transition-all duration-200 ${
+                      darkMode
+                        ? 'bg-white/10 hover:bg-white/20 border border-white/20'
+                        : 'bg-gray-100 hover:bg-gray-200 border border-gray-200'
+                    }`}
+                  >
+                    View All
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                {/* Active Requests */}
+                <div>
+                  <h4 className="font-semibold mb-3 text-red-500">Active Requests (5)</h4>
+                  <div className="space-y-3">
+                    <div className={`p-4 rounded-lg border ${
+                      darkMode ? 'bg-red-500/10 border-red-500/20' : 'bg-red-50 border-red-200'
+                    }`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium">Docker Container Issue</span>
+                        <span className="text-xs opacity-70">2 min ago</span>
+                      </div>
+                      <p className="text-sm opacity-80 mb-3">Container keeps crashing on startup, getting exit code 1...</p>
+                      <div className="flex gap-2">
+                        <button className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                          View Details
+                        </button>
+                        <button className="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">
+                          Respond
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className={`p-4 rounded-lg border ${
+                      darkMode ? 'bg-red-500/10 border-red-500/20' : 'bg-red-50 border-red-200'
+                    }`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium">React Hook Error</span>
+                        <span className="text-xs opacity-70">5 min ago</span>
+                      </div>
+                      <p className="text-sm opacity-80 mb-3">useEffect dependency array causing infinite re-renders...</p>
+                      <div className="flex gap-2">
+                        <button className="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                          View Details
+                        </button>
+                        <button className="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">
+                          Respond
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Completed Solutions */}
+                <div>
+                  <h4 className="font-semibold mb-3 text-green-500">Completed (My Solutions)</h4>
+                  <div className="space-y-3">
+                    <div className={`p-4 rounded-lg border ${
+                      darkMode ? 'bg-green-500/10 border-green-500/20' : 'bg-green-50 border-green-200'
+                    }`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium">API Rate Limiting</span>
+                        <span className="text-xs opacity-70">1 hour ago</span>
+                      </div>
+                      <p className="text-sm opacity-80 mb-2">✅ Solved: Implemented exponential backoff strategy</p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="text-green-500">+$15 earned</span>
+                        <span className="opacity-70">⭐ 5.0 rating</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Upcoming Sessions */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border ${
+              darkMode
+                ? 'bg-white/10 border-white/20'
+                : 'bg-white/80 border-gray-200'
+            }`}>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-xl font-bold mb-1">Upcoming Sessions</h3>
+                  <p className="text-sm opacity-70">Your scheduled sessions with users</p>
+                </div>
+              </div>
+
+              <div className="text-center py-12">
+                <div className={`w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center ${
+                  darkMode ? 'bg-white/10' : 'bg-gray-100'
+                }`}>
+                  <Calendar className="w-8 h-8 opacity-50" />
+                </div>
+                <h4 className="text-lg font-semibold mb-2">No upcoming sessions</h4>
+                <p className="text-sm opacity-70">You don't have any scheduled sessions.</p>
+              </div>
+            </div>
+
+            {/* Your Content */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border ${
+              darkMode
+                ? 'bg-white/10 border-white/20'
+                : 'bg-white/80 border-gray-200'
+            }`}>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-xl font-bold mb-1">Your Content</h3>
+                  <p className="text-sm opacity-70">Tutorials and resources you've created</p>
+                </div>
+                <GlassButton
+                  onClick={handleCreateTutorial}
+                  className="flex items-center gap-2"
+                >
+                  <Plus className="w-4 h-4" />
+                  Create Tutorial
+                </GlassButton>
+              </div>
+
+              <div className="space-y-4">
+                <div className={`p-4 rounded-lg border ${
+                  darkMode ? 'bg-white/5 border-white/10' : 'bg-gray-50 border-gray-200'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-semibold">React Performance Issues</h4>
+                      <p className="text-sm opacity-70">45 min session • 3 days ago</p>
+                    </div>
+                    <span className="text-green-500 font-semibold">+$45.00</span>
+                  </div>
+                </div>
+
+                <div className={`p-4 rounded-lg border ${
+                  darkMode ? 'bg-white/5 border-white/10' : 'bg-gray-50 border-gray-200'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-semibold">AWS Lambda Setup</h4>
+                      <p className="text-sm opacity-70">30 min session • 5 days ago</p>
+                    </div>
+                    <span className="text-green-500 font-semibold">+$30.00</span>
+                  </div>
+                </div>
+
+                <div className={`p-4 rounded-lg border ${
+                  darkMode ? 'bg-white/5 border-white/10' : 'bg-gray-50 border-gray-200'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-semibold">Docker Container Issue</h4>
+                      <p className="text-sm opacity-70">60 min session • 1 week ago</p>
+                    </div>
+                    <span className="text-green-500 font-semibold">+$60.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column */}
+          <div className="space-y-8">
+            {/* Recent Earnings */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border ${
+              darkMode
+                ? 'bg-white/10 border-white/20'
+                : 'bg-white/80 border-gray-200'
+            }`}>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h3 className="text-xl font-bold mb-1">Recent Earnings</h3>
+                  <p className="text-sm opacity-70">Your recent session payments</p>
+                </div>
+                <GlassButton
+                  onClick={handleViewEarnings}
+                  className="flex items-center gap-2 text-sm"
+                >
+                  <Eye className="w-4 h-4" />
+                  View Detailed Earnings
+                </GlassButton>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="font-semibold">React Performance Issues</h4>
+                    <p className="text-sm opacity-70">45 min session • 3 days ago</p>
+                  </div>
+                  <span className="text-green-500 font-semibold">+$45.00</span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="font-semibold">AWS Lambda Setup</h4>
+                    <p className="text-sm opacity-70">30 min session • 5 days ago</p>
+                  </div>
+                  <span className="text-green-500 font-semibold">+$30.00</span>
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="font-semibold">Docker Container Issue</h4>
+                    <p className="text-sm opacity-70">60 min session • 1 week ago</p>
+                  </div>
+                  <span className="text-green-500 font-semibold">+$60.00</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Expert Profile */}
+            <div className={`p-6 rounded-xl shadow-lg backdrop-blur-md border ${
+              darkMode
+                ? 'bg-white/10 border-white/20'
+                : 'bg-white/80 border-gray-200'
+            }`}>
+              <div className="mb-6">
+                <h3 className="text-xl font-bold mb-1">Expert Profile</h3>
+                <p className="text-sm opacity-70">Your expertise and reputation</p>
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <h4 className="font-semibold mb-3">Expertise Domains</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <span className={`px-3 py-1 rounded-full text-sm ${
+                      darkMode ? 'bg-blue-500/20 text-blue-300' : 'bg-blue-100 text-blue-700'
+                    }`}>
+                      Frontend Development
+                    </span>
+                    <span className={`px-3 py-1 rounded-full text-sm ${
+                      darkMode ? 'bg-green-500/20 text-green-300' : 'bg-green-100 text-green-700'
+                    }`}>
+                      React.js
+                    </span>
+                    <span className={`px-3 py-1 rounded-full text-sm ${
+                      darkMode ? 'bg-purple-500/20 text-purple-300' : 'bg-purple-100 text-purple-700'
+                    }`}>
+                      TypeScript
+                    </span>
+                    <span className={`px-3 py-1 rounded-full text-sm ${
+                      darkMode ? 'bg-orange-500/20 text-orange-300' : 'bg-orange-100 text-orange-700'
+                    }`}>
+                      Redux
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-3">Current Rate</h4>
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl font-bold">$45</span>
+                    <span className="opacity-70">/hour</span>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold mb-3">Recent Activity</h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span>Login successful</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span>Welcome back!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default DashboardTest
